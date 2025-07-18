@@ -9,6 +9,7 @@ import warnings
 import os
 import time
 import multiprocessing as mp
+from pathos.multiprocessing import ProcessingPool as Pool
 
 
 # function for plotting the density (heatmap) of a 2D array
@@ -93,6 +94,8 @@ def density(
  
     return fig, ax
 
+def _default_kwargs():
+    return {"num_cpus": os.cpu_count() or 1}
 
 def evolve(omega_d, t_g):
     args = {'wd': omega_d}
